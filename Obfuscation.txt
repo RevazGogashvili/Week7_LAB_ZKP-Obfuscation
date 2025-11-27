@@ -1,0 +1,20 @@
+1. Manual Obfuscation: Lexical Obfuscation
+For the manual file, I applied Lexical Obfuscation. This process involved:
+- Renaming Variables and Functions: The descriptive function name 'generate_fibonacci' was changed to 'x', and the variable 'sequence' was changed to 'r'.
+- Removing Metadata: All comments and docstrings (documentation) were removed.
+- Minification: I removed unnecessary whitespace and combined lines where possible.
+
+The goal of lexical obfuscation is to remove the "context" for a human reader.
+While the computer understands 'x' just as well as 'generate_fibonacci', a human attacker trying to reverse-engineer the code cannot easily guess what the function does just by looking at the name.
+They are forced to trace the logic line-by-line.
+
+2. Automatic Obfuscation: Encoding/Packing
+For the automatic file, I simulated a technique used by script packers involving Base64 Encoding and dynamic execution.
+I took the source code, converted it into a Base64 string, and used Python's `exec()` function to run it.
+
+This technique falls under Data/Format Obfuscation.
+It completely hides the logic from a static analysis.
+If an attacker opens the file, they do not see Python logic (loops, if-statements);
+they only see a block of random alphanumeric characters.
+This prevents casual tampering and evades simple signature-based detection systems that look for specific code patterns.
+To analyze it, the attacker must find a way to decode the string first.
