@@ -1,0 +1,7 @@
+import base64
+
+obfuscated_data = b'ZGVmIGF1dG9fZmliKG4pOgogICAgYSxiPTAsMQogICAgbD1bXQogICAgZm9yIF8gaW4gcmFuZ2Uobik6CiAgICAgICAgbC5hcHBlbmQoYSkKICAgICAgICBhLGI9YixhK2IKICAgIHJldHVybiBsCnJlc3VsdCA9IGF1dG9fZmliKDEwKQ=='
+
+exec(base64.b64decode(obfuscated_data))
+
+print(f"Automatic Obfuscated Output: {result}")
