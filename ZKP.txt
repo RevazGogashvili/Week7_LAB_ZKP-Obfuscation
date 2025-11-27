@@ -1,0 +1,56 @@
+The simulate_malicious_prover function models the "Ali Baba Cave" ZKP protocol.
+
+We have a cheating prover (Alice) who attempts to convince a verifier (Bob) that she has a password when she does not.
+The goal of the code is to demonstrate the concept of Soundness:
+Showing that without the secret, the probability of consistently fooling the verifier is statistically low.
+
+Initialization:
+The function accepts a trials argument (defaulting to 20 rounds).
+It initializes a success_count variable to zero to track how many times the prover successfully guesses the correct path.
+
+The Simulation Loop:
+The code iterates through a for loop, representing the number of times the test is repeated.
+In every iteration (round), two random events occur:
+Prover's Entry (path_entered): The code randomly selects either path 'A' or 'B'.
+This represents Alice walking into the cave.
+Verifier's Challenge (challenge): The code independently selects a random path ('A' or 'B').
+This represents Bob calling out which side he wants Alice to exit from.
+
+Verification Logic (The "Cheater" Constraint):
+Because this simulates a malicious prover who does not know the password,
+the logical constraint is that the prover cannot pass through the locked door connecting the two paths.
+Therefore: if path_entered is equal to challenge, the prover succeeds by luck.
+If path_entered is not equal to challenge, the prover fails (she is trapped in the wrong tunnel).
+
+Result Aggregation:
+If the condition is met, the success_count is incremented.
+The script then calculates the final success percentage:
+
+--- Simulating Malicious Prover (No Password) over 20 trials ---
+Round 1: Entered B, Challenge A -> Fail (Caught!)
+Round 2: Entered B, Challenge A -> Fail (Caught!)
+Round 3: Entered B, Challenge A -> Fail (Caught!)
+Round 4: Entered B, Challenge A -> Fail (Caught!)
+Round 5: Entered B, Challenge B -> Success (Lucky Guess)
+Round 6: Entered B, Challenge B -> Success (Lucky Guess)
+Round 7: Entered A, Challenge B -> Fail (Caught!)
+Round 8: Entered B, Challenge A -> Fail (Caught!)
+Round 9: Entered A, Challenge B -> Fail (Caught!)
+Round 10: Entered A, Challenge A -> Success (Lucky Guess)
+Round 11: Entered B, Challenge B -> Success (Lucky Guess)
+Round 12: Entered B, Challenge B -> Success (Lucky Guess)
+Round 13: Entered A, Challenge A -> Success (Lucky Guess)
+Round 14: Entered A, Challenge B -> Fail (Caught!)
+Round 15: Entered B, Challenge A -> Fail (Caught!)
+Round 16: Entered A, Challenge B -> Fail (Caught!)
+Round 17: Entered A, Challenge A -> Success (Lucky Guess)
+Round 18: Entered B, Challenge B -> Success (Lucky Guess)
+Round 19: Entered A, Challenge A -> Success (Lucky Guess)
+Round 20: Entered A, Challenge B -> Fail (Caught!)
+
+Final Results:
+Total Successful responses: 9/20
+Success Probability: 45.0%
+
+The output demonstrates that a cheater's success rate converges towards 50% over time.
+Thus proving that knowledge of the password cannot be reliably faked.
